@@ -4,6 +4,7 @@ package net.gestionachat.dto;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,8 +13,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Email;
+import net.gestionachat.entities.Role;
 import net.gestionachat.token.Token;
-import net.gestionachat.user.Role;
 import org.springframework.beans.BeanUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,7 +39,7 @@ public class UserDto{
     private String position;
     private String departement;
 
-    private Role role;
+    private List<Role> roles;
 	// Constructeur prenant une chaîne JSON en argument
 	public UserDto(String json) {
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -60,6 +61,8 @@ public class UserDto{
 
 		  UserDto userDto =new UserDto();
 		  BeanUtils.copyProperties(entity,userDto);
+		  List<net.gestionachat.entities.Role> rolesDto = entity.getRoles();
+			  userDto.setRoles(rolesDto);
 		  return userDto;
 
 		  }

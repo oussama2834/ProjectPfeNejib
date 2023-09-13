@@ -57,6 +57,27 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 //     },
                 // ],
             },
+            {
+                id      : 'apps.ecommerce',
+                title   : 'Comptes',
+                type    : 'collapsable',
+                icon    : 'heroicons_outline:shopping-cart',
+
+                children: [
+                    {
+                        id   : 'apps.ecommerce.inventory',
+                        title: 'Utilisateurs',
+                        type : 'basic',
+                        link : '/dashboards/comptes/users',
+                    },
+                    {
+                        id   : 'apps.ecommerce.inventory',
+                        title: 'Roles',
+                        type : 'basic',
+                        link : '/dashboards/comptes/roles',
+                    },
+                ],
+            },
         ],
     },
 

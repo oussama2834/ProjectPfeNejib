@@ -3,6 +3,7 @@ import { initialDataResolver } from 'app/app.resolvers';
 import { AuthGuard } from 'app/core/auth/guards/auth.guard';
 import { NoAuthGuard } from 'app/core/auth/guards/noAuth.guard';
 import { LayoutComponent } from 'app/layout/layout.component';
+import { ComptesComponent } from './modules/admin/apps/comptes/comptes.component';
 
 // @formatter:off
 /* eslint-disable max-len */
@@ -94,7 +95,18 @@ export const appRoutes: Route[] = [
                 {path: 'demandeachat', loadChildren: () => import('app/modules/admin/apps/demandeAchatComponent/demande-achat.routes')},
                 { path: 'articles', loadChildren: () => import('app/modules/admin/apps/Articles/articles.routes') },
                 { path: 'Add-article', loadChildren: () => import('app/modules/admin/apps/add-article/add-article.routes') },
+
+                {
+                    path: 'comptes', component: ComptesComponent, children: [
+                        { path: 'users', loadChildren: () => import('app/modules/admin/apps/users/users.routes') },
+                        { path: 'roles', loadChildren: () => import('app/modules/admin/apps/roles/roles.routes') },
+             ] },
+
+
+
+
                 { path: 'article', loadChildren: () => import('app/modules/admin/apps/article/article.routes') },
+
             ]},
 
             // Apps

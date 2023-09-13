@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Role, User } from 'app/core/user/user.types';
 import { map, Observable, ReplaySubject, tap } from 'rxjs';
-const URL = "http://localhost:8080/api/v1/roles"
+const URL_roles = "http://localhost:8080/api/v1/roles"
+const URL_users = "http://localhost:8080/api/v1/auth"
 @Injectable({providedIn: 'root'})
 export class UserService
 {
@@ -37,10 +38,17 @@ export class UserService
 
 /* Added */
    public GetRoles() {
-     return this._httpClient.get<Role[]>(URL+"/findAll")
+     return this._httpClient.get<Role[]>(URL_roles+"/findAll")
     }
     public AddRole(role : Role) {
-      return    this._httpClient.post(URL+"/create-role",role)
+      return    this._httpClient.post(URL_roles+"/create-role",role)
+    }
+
+   public GetUsers() {
+     return this._httpClient.get<User[]>(URL_users+"/findAllUser")
+    }
+    public AddUser(user : User) {
+      return    this._httpClient.post(URL_users+"/createUser",user)
     }
 
 

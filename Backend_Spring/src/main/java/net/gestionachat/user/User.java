@@ -1,6 +1,7 @@
 package net.gestionachat.user;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.*;
@@ -52,7 +53,7 @@ public class User implements UserDetails {
         joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "role_id"))
 private List<Role> roles;
-
+@JsonIgnore
   @OneToMany(mappedBy = "user")
   private List<Token> tokens;
 

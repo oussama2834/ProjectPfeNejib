@@ -24,6 +24,7 @@ import org.springframework.beans.BeanUtils;
 
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -34,7 +35,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class UserImplService implements UserService {
-
+	private final PasswordEncoder passwordEncoder;
 	private final UserRepository userRepository;
     private ObjectValidator<UserDto> objectValidator;
 	EmailService emailService;
@@ -43,7 +44,8 @@ public class UserImplService implements UserService {
 
     @Override
 	  public UserDto save(UserDto userDto) {
-	  objectValidator.validate(userDto);
+//	  objectValidator.validate(userDto);
+		userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
 	  return UserDto.FromEntity(
 	  userRepository.save(UserDto.toEntity(userDto)) );
 	  }
